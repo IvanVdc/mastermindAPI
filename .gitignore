@@ -46,3 +46,10 @@
 
 # Embedded web-server pid file
 /.web-server-pid
+
+#docker
+/docker-compose.override.yaml
+/docker-compose.override.yml
+
+#phpstorm
+/api/.idea/
