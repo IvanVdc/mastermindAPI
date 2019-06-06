@@ -11,6 +11,10 @@
         <env name="KERNEL_CLASS" value="App\Kernel" />
         <env name="DATABASE_URL" value="postgres://api-platform:!ChangeMe!@db/api" />
         <server name="KERNEL_CLASS" value="AppKernel" />
+        <server name="APP_ENV" value="test" force="true" />
+        <server name="SHELL_VERBOSITY" value="-1" />
+        <server name="SYMFONY_PHPUNIT_REMOVE" value="" />
+        <server name="SYMFONY_PHPUNIT_VERSION" value="6.5" />
     </php>
 
     <testsuites>
