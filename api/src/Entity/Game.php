@@ -149,8 +149,15 @@ class Game
         }
         foreach (range(0, $this->numCodes-1) as $i) {
             $color = $guess[$i];
-            if(in_array($color, $init_goal)){
-                $result['WHITE']++;
+            $exists = false;
+            $i = 0;
+            while (!$exists && $i<$this->numCodes) {
+                if ($color === $init_goal[$i]) {
+                    $result['WHITE']++;
+                    $init_goal[$i] = 'NONE';
+                    $exists = true;
+                }
+                $i++;
             }
         }
         return $result;

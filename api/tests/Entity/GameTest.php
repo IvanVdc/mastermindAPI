@@ -71,7 +71,7 @@ class GameTest extends TestCase
         $result = $game->getResult($guess);
         $this->assertEquals(2, $result['BLACK']+$result['WHITE']);
 
-        $guess[2]=$game->getGoal()[1];
+        $guess[2]=$game->getGoal()[0];
         $result = $game->getResult($guess);
         $this->assertEquals(3, $result['BLACK']+$result['WHITE']);
     }
