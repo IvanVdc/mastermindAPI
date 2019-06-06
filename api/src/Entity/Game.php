@@ -83,6 +83,11 @@ class Game
         return $this->id;
     }
 
+    public function getListColors()
+    {
+        return $this->listColors;
+    }
+
     public function getUser()
     {
         return $this->user;
@@ -137,7 +142,7 @@ class Game
 
     public function getGoal()
     {
-        return $this->goal;
+        return json_decode($this->goal);
     }
 
     public function setGoal($goal)
@@ -145,7 +150,7 @@ class Game
         if(!$this->checkCombination($goal)) {
             throw new Exception('Invalid goal combination');
         }
-        $this->goal = $goal;
+        $this->goal = json_encode($goal);
         return $this;
     }
 
