@@ -58,6 +58,18 @@ class PlayerTest extends KernelTestCase
         $this->assertEquals(true, ($game instanceof Game));
     }
 
+    public function testGetGame()
+    {
+        $game = $this->player_playing->getGame();
+        $this->assertEquals(true, ($game instanceof Game));
+    }
+
+    public function testErrorGetGame()
+    {
+        $this->expectException(Exception::class);
+        $this->player_without_games->getGame();
+    }
+
     public function testErrorCanCreateGame()
     {
         $this->expectException(Exception::class);

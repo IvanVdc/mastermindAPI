@@ -58,10 +58,23 @@ class Player implements Manageable
         return $game;
     }
 
+    public function getGame(){
+        $games = $this->entityManager->getRepository("App:Game")->findBy(array(
+                "user" => $this->player->getId()
+            ),
+            array('id' => 'ASC')
+        );
+        if(!$games){
+            throw new Exception('Player has not any game.');
+        }
+        return $games[count($games)-1];
+    }
+
     public function getHistoric(){
         $games = $this->entityManager->getRepository("App:Game")->findBy(array(
                 "user" => $this->player->getId()
-            )
+            ),
+            array('id' => 'ASC')
         );
         $result = array();
         foreach($games as $game){

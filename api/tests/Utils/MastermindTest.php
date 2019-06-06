@@ -14,9 +14,9 @@ class MastermindTest extends KernelTestCase
      * @var \Doctrine\ORM\EntityManager
      */
     private $entityManager;
-    protected $game_initialized;
     protected $game_won;
     protected $game_losed;
+    protected $game_initialized;
 
     public function setUp()
     {
@@ -29,9 +29,9 @@ class MastermindTest extends KernelTestCase
             ->getRepository(Game::class)
             ->findAll()
         ;
-        $this->game_initialized = new Mastermind($this->entityManager, $games[0]);
-        $this->game_won = new Mastermind($this->entityManager, $games[1]);
-        $this->game_losed = new Mastermind($this->entityManager, $games[2]);
+        $this->game_won = new Mastermind($this->entityManager, $games[0]);
+        $this->game_losed = new Mastermind($this->entityManager, $games[1]);
+        $this->game_initialized = new Mastermind($this->entityManager, $games[2]);
     }
 
     public function testIsOver()

@@ -20,6 +20,13 @@ interface Manageable
     public function createCustomNewGame($maxTries=null, $numCodes=null);
 
     /**
+     * Function to get the last game.
+     *
+     * @return Game
+     */
+    public function getGame();
+
+    /**
      * Function to read all the game played
      *
      * @return string

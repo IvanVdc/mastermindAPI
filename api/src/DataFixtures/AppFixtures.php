@@ -26,7 +26,7 @@ class AppFixtures extends Fixture
             'password'
         ));
         $user->setUsername('test');
-        $user->setApiToken('test_token');
+        $user->setApiToken('test');
         $manager->persist($user);
 
 
@@ -36,41 +36,41 @@ class AppFixtures extends Fixture
             'password2'
         ));
         $user2->setUsername('test2');
-        $user2->setApiToken('test_token2');
+        $user2->setApiToken('test2');
         $manager->persist($user2);
 
         $game = new Game();
         $game->setUser($user2);
+        $game->setOver(true);
+        $game->setPlayerWin(true);
         $manager->persist($game);
 
-        $game2 = new Game();
-        $game2->setUser($user2);
-        $game2->setOver(true);
-        $game2->setPlayerWin(true);
-        $manager->persist($game2);
-
         $turn1 = new Turn();
-        $turn1->setGame($game2);
-        $turn1->setGuess($game2->getGoal());
+        $turn1->setGame($game);
+        $turn1->setGuess($game->getGoal());
         $turn1->setResult(array());
         $manager->persist($turn1);
 
-        $game3 = new Game(2,4);
-        $game3->setUser($user2);
-        $game3->setOver(true);
-        $manager->persist($game3);
+        $game2 = new Game(2,4);
+        $game2->setUser($user2);
+        $game2->setOver(true);
+        $manager->persist($game2);
 
         $turn2 = new Turn();
-        $turn2->setGame($game3);
+        $turn2->setGame($game2);
         $turn2->setGuess(array());
         $turn2->setResult(array());
         $manager->persist($turn2);
 
         $turn3 = new Turn();
-        $turn3->setGame($game3);
+        $turn3->setGame($game2);
         $turn3->setGuess(array());
         $turn3->setResult(array());
         $manager->persist($turn3);
+
+        $game3 = new Game();
+        $game3->setUser($user2);
+        $manager->persist($game3);
 
         $manager->flush();
     }

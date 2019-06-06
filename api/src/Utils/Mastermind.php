@@ -78,6 +78,9 @@ class Mastermind implements Playable
         $result = $this->game->getResult($turn->getGuess());
         $turn->setResult($result);
         $this->entityManager->persist($turn);
+        if($this->env!=='test') {
+            $this->entityManager->flush();
+        }
 
         if($result['BLACK']==$this->game->getNumCodes()){
             $this->game->setOver(true);
@@ -88,6 +91,7 @@ class Mastermind implements Playable
             $this->game->setOver(true);
             $this->entityManager->persist($this->game);
         }
+
         if($this->env!=='test') {
             $this->entityManager->flush();
         }
