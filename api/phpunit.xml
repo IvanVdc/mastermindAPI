@@ -6,6 +6,13 @@
         colors="true"
         bootstrap="vendor/autoload.php"
 >
+    <php>
+        <ini name="error_reporting" value="-1" />
+        <env name="KERNEL_CLASS" value="App\Kernel" />
+        <env name="DATABASE_URL" value="postgres://api-platform:!ChangeMe!@db/api" />
+        <server name="KERNEL_CLASS" value="AppKernel" />
+    </php>
+
     <testsuites>
         <testsuite name="Test Suite">
             <directory>./tests</directory>
