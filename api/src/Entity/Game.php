@@ -70,12 +70,17 @@ class Game
     /**
      * Constructor function.
      */
-    public function __construct()
+    public function __construct($maxTries=12, $numCodes=4)
     {
         $this->over = false;
         $this->playerWin = false;
-        $this->maxTries = 12;
-        $this->numCodes = 4;
+        $this->maxTries = $maxTries;
+        $this->numCodes = $numCodes;
+        $goal = array();
+        foreach (range(1, $numCodes) as $número) {
+            $goal[]=$this->listColors[rand(0,count($this->listColors)-1)];
+        }
+        $this->goal = json_encode($goal);
     }
 
     public function getId()
@@ -104,21 +109,9 @@ class Game
         return $this->maxTries;
     }
 
-    public function setMaxTries($maxTries)
-    {
-        $this->maxTries = $maxTries;
-        return $this;
-    }
-
     public function getNumCodes()
     {
         return $this->numCodes;
-    }
-
-    public function setNumCodes($numCodes)
-    {
-        $this->numCodes = $numCodes;
-        return $this;
     }
 
     private function colorValid($color){
@@ -140,18 +133,32 @@ class Game
         return true;
     }
 
+    public function getResult($guess){
+        $result = array(
+            'WHITE' => 0,
+            'BLACK' => 0
+        );
+        $init_goal = $this->getGoal();
+        foreach (range(0, $this->numCodes-1) as $i) {
+            $color = $guess[$i];
+            if ($color === $this->getGoal()[$i]) {
+                $result['BLACK']++;
+                $init_goal[$i] = 'NONE';
+                $guess[$i] = 'DONE';
+            }
+        }
+        foreach (range(0, $this->numCodes-1) as $i) {
+            $color = $guess[$i];
+            if(in_array($color, $init_goal)){
+                $result['WHITE']++;
+            }
+        }
+        return $result;
+    }
+
     public function getGoal()
     {
         return json_decode($this->goal);
-    }
-
-    public function setGoal($goal)
-    {
-        if(!$this->checkCombination($goal)) {
-            throw new Exception('Invalid goal combination');
-        }
-        $this->goal = json_encode($goal);
-        return $this;
     }
 
     public function getOver()

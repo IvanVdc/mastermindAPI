@@ -16,8 +16,8 @@ class TurnTest extends TestCase
 
     public function testSettersAndGetters()
     {
-        $guess = json_encode(array('RED','BLUE','YELLOW','RED'));
-        $result = json_encode(array('BLACK'=>'1','WHITE'=>'1'));
+        $guess = array('RED','BLUE','YELLOW','RED');
+        $result = array('BLACK'=>1,'WHITE'=>1);
         $this->turn->setGuess($guess);
         $this->turn->setResult($result);
         $this->assertEquals(null, $this->turn->getGame());

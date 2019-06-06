@@ -65,23 +65,23 @@ class Turn
 
     public function getGuess()
     {
-        return $this->guess;
+        return json_decode($this->guess);
     }
 
     public function setGuess($guess)
     {
-        $this->guess = $guess;
+        $this->guess = json_encode($guess);
         return $this;
     }
 
     public function getResult()
     {
-        return $this->result;
+        return json_decode($this->result, true);
     }
 
     public function setResult($result)
     {
-        $this->result = $result;
+        $this->result = json_encode($result);
         return $this;
     }
 }
