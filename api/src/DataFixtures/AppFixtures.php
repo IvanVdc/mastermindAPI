@@ -72,6 +72,27 @@ class AppFixtures extends Fixture
         $game3->setUser($user2);
         $manager->persist($game3);
 
+        $user3 = new User();
+        $user3->setPassword($this->passwordEncoder->encodePassword(
+            $user3,
+            'password'
+        ));
+        $user3->setUsername('test3');
+        $user3->setApiToken('test3');
+        $manager->persist($user3);
+
+        $game4 = new Game();
+        $game4->setUser($user3);
+        $game4->setOver(true);
+        $game4->setPlayerWin(true);
+        $manager->persist($game4);
+
+        $turn4 = new Turn();
+        $turn4->setGame($game4);
+        $turn4->setGuess(array());
+        $turn4->setResult(array());
+        $manager->persist($turn4);
+
         $manager->flush();
     }
 }
